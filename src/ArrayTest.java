@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 class Solution {
     public boolean containsDuplicate(int[] nums) {
@@ -69,14 +70,38 @@ class Solution {
         return digits;
     }
 
+    public void moveZeroes(int[] nums) {
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (nums[i] == 0 && nums[i + 1] != 0) {
+                for (int j = i; j < nums.length - 1; j++) {
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = 0;
+                }
+            }
+        }
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+        int[] res = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i; j < nums.length; j++) {
+                if ((nums[i] + nums[j]) == target) {
+                    res[0] = i;
+                    res[1] = j;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
 }
 
 public class ArrayTest {
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[] nums = {9, 9, 0};
-        int[] a = s.plusOne(nums);
-        for (int value : a) {
+        int[] nums = {1, 2, 3, 0, 5, 9, 1};
+        s.moveZeroes(nums);
+        for (int value : nums) {
             System.out.println(value);
         }
 
