@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 class Solution {
     public boolean containsDuplicate(int[] nums) {
@@ -94,16 +92,48 @@ class Solution {
         }
         return res;
     }
+
+
+    public void reserve(char[] s, int i){
+        char temp = s[i];
+        s[i] = s[s.length-1-i];
+        s[s.length-1-i] = temp;
+    }
+
+    public void reverseString(char[] s) {
+        for(int i =0 ; i< s.length/2; i++) {
+            reserve(s, i);
+        }
+    }
+
+    public boolean isValidSudoku(char[][] board) {
+        int[] isValidList = {0, 0, 0};
+        for (int i = 0; i < 9; i++) {
+
+        }
+        return false;
+    }
+
+    public boolean hasDuplicates(int[] nums) {
+        Set<Integer> reduceDuplicates = new HashSet<Integer>();
+        for (int num : nums) {
+            reduceDuplicates.add(num);
+        }
+        return reduceDuplicates.size() != nums.length;
+    }
 }
 
 public class ArrayTest {
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[] nums = {1, 2, 3, 0, 5, 9, 1};
-        s.moveZeroes(nums);
-        for (int value : nums) {
-            System.out.println(value);
-        }
+        int[] nums = {1, 2, 3, 0, 5, 9, 4};
+        System.out.println(s.hasDuplicates(nums));
+
+        //        Solution s = new Solution();
+//        s.moveZeroes(nums);
+//        for (int value : nums) {
+//            System.out.println(value);
+//        }
 
     }
 }
