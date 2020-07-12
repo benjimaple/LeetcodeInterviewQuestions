@@ -94,14 +94,14 @@ class Solution {
     }
 
 
-    public void reserve(char[] s, int i){
+    public void reserve(char[] s, int i) {
         char temp = s[i];
-        s[i] = s[s.length-1-i];
-        s[s.length-1-i] = temp;
+        s[i] = s[s.length - 1 - i];
+        s[s.length - 1 - i] = temp;
     }
 
     public void reverseString(char[] s) {
-        for(int i =0 ; i< s.length/2; i++) {
+        for (int i = 0; i < s.length / 2; i++) {
             reserve(s, i);
         }
     }
@@ -121,19 +121,57 @@ class Solution {
         }
         return reduceDuplicates.size() != nums.length;
     }
+
+    public int firstUniqChar(String s) {
+        if (s.length() == 1) {
+            return 0;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            boolean isDuplicate = false;
+            for (int j = 0; j < i; j++) {
+                if (s.charAt(j) == s.charAt(i)) {
+                    isDuplicate = true;
+                }
+            }
+            for (int k = i + 1; k < s.length(); k++) {
+                if (s.charAt(k) == s.charAt(i)) {
+                    isDuplicate = true;
+                }
+
+
+            }
+            if (!isDuplicate) {
+                return i;
+
+            }
+        }
+        return -1;
+    }
+
+
+    public boolean isPalindrome(String inputString) {
+        String s  = inputString.trim();
+        if(s.isEmpty()) return true;
+        ArrayList<Character> stringList = new ArrayList<>();
+        String lowercaseString = s.toLowerCase();
+        for (int i = 0; i < s.length(); i++) {
+            int ascii = (int) lowercaseString.charAt(i);
+            if ((ascii >= 48 && ascii <= 57) || (ascii >= 97 && ascii <= 122)) {
+                stringList.add(lowercaseString.charAt(i));
+            }
+        }
+        for (int i = 0; i < Math.round(s.length() / 2); i++) {
+            if (stringList.get(i) != stringList.get(stringList.size() - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 public class ArrayTest {
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[] nums = {1, 2, 3, 0, 5, 9, 4};
-        System.out.println(s.hasDuplicates(nums));
-
-        //        Solution s = new Solution();
-//        s.moveZeroes(nums);
-//        for (int value : nums) {
-//            System.out.println(value);
-//        }
-
+        System.out.println(        s.isPalindrome("A man, a plan, a canal: Panama"));
     }
 }
